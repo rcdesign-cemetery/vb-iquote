@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<product productid="rcd_iquote" active="1">
+    <title>iQuote</title>
+    <description />
+    <version>0.2</version>
+    <url />
+    <versioncheckurl />
+    <apm_releasedate>0</apm_releasedate>
+    <apm_author />
+    <apm_relatedurl />
+    <apm_extrainfo />
+    <apm_extraedit />
+    <dependencies>
+    </dependencies>
+    <codes>
+    </codes>
+    <templates>
+        <template name="rcd_iquote_context_menu" templatetype="template" date="1280449501" username="jpatuk" version="0.2"><![CDATA[<!-- iQuote popup menu -->
+<div id="iquote_popup_menu">
+ <div class="iquote_menu">
+  <ul class="popupbody">
+   <li><a href="#" rel="nofollow" onclick="return iQuote.quote_text();">$vbphrase[rcd_iquote_context_menu_quote]</a></li>
+  </ul>
+ </div>
+</div>
+
+]]></template>
+        <template name="rcd_iquote_css" templatetype="template" date="1280449481" username="jpatuk" version="0.2"><![CDATA[<!-- iQuote css -->
+<style type="text/css">
+.iquote_menu {
+  padding:none;
+  margin:none;
+  width:auto;
+  height:auto;
+  position:absolute;
+}
+
+.iquote_menu ul {
+  -moz-border-radius:5px 5px 5px 5px;
+  direction:ltr;
+  padding:none;
+  margin:none;
+  border:1px solid {vb:stylevar navbar_tab_background.backgroundColor};
+  background:{vb:stylevar navbar_tab_background.backgroundColor};
+  width:auto;
+  min-width:20px;
+  position:absolute;
+  top:50%;
+}
+
+.iquote_menu a {
+  padding-top:5px !important;
+  padding-bottom:5px !important;
+}
+</style>]]></template>
+        <template name="rcd_iquote_init_js" templatetype="template" date="1280449523" username="jpatuk" version="0.2"><![CDATA[<script type="text/javascript">
+<!--
+iQuote.init('posts');
+//-->
+</script>]]></template>
+        <template name="rcd_iquote_js" templatetype="template" date="1280449436" username="jpatuk" version="0.2"><![CDATA[<!-- YUI menu dependencies -->
+<script type="text/javascript" src="clientscript/yui/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="clientscript/yui/container/container_core-min.js"></script>
+<script type="text/javascript" src="clientscript/yui/menu/menu-min.js"></script>
+
+<!-- iQuote source -->
+<script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>
+        ]]></template>
+    </templates>
+    <stylevardfns>
+    </stylevardfns>
+    <stylevars>
+    </stylevars>
+    <plugins>
+        <plugin active="1" executionorder="5">
+            <title>Cache templates</title>
+            <hookname>cache_templates</hookname>
+            <phpcode><![CDATA[if (THIS_SCRIPT == 'showthread' AND $show['member'])
+{
+    $cache = array_merge((array)$cache,array(
+        'rcd_iquote_css',
+        'rcd_iquote_context_menu',
+        'rcd_iquote_js',
+        'rcd_iquote_init_js'
+    ));
+}]]></phpcode>
+        </plugin>
+        <plugin active="1" executionorder="5">
+            <title>Insert js and css</title>
+            <hookname>parse_templates</hookname>
+            <phpcode><![CDATA[if (THIS_SCRIPT == 'showthread' AND  $show['member'])
+{
+    //define product version and assign it to JS version
+    define('RCD_IQUOTE_VERSION', '0.2');
+    $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION : TIMENOW;
+    define('RCD_IQUOTE_JS_VERSION', $version);
+
+    //add rcd_iquote.js file
+    $rcd_iquote_templater = vB_Template::create('rcd_iquote_js');
+    $rcd_iquote_templater->register('version', RCD_IQUOTE_JS_VERSION);
+    $template_hook['headinclude_javascript'] .= $rcd_iquote_templater->render();
+
+    //init quotes
+    $rcd_iquote_templater = vB_Template::create('rcd_iquote_init_js');
+    $template_hook['footer_javascript'] .= $rcd_iquote_templater->render();
+
+    //add context menu
+    $rcd_iquote_templater = vB_Template::create('rcd_iquote_context_menu');
+    $template_hook['showthread_after_activeusers'] .= $rcd_iquote_templater->render();
+
+    //add css for context menu
+    $rcd_iquote_templater = vB_Template::create('rcd_iquote_css');
+    $template_hook['headinclude_bottom_css'] .= $rcd_iquote_templater->render();
+}]]></phpcode>
+        </plugin>
+    </plugins>
+    <phrases>
+        <phrasetype name="Postbit" fieldname="postbit">
+            <phrase name="rcd_iquote_context_menu_quote" date="1280474725" username="jpatuk" version=""><![CDATA[Quote]]></phrase>
+        </phrasetype>
+    </phrases>
+    <options>
+    </options>
+    <helptopics>
+    </helptopics>
+    <cronentries>
+    </cronentries>
+    <faqentries>
+    </faqentries>
+    <templateedits>
+    </templateedits>
+</product>
