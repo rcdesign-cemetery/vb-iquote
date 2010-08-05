@@ -2,10 +2,10 @@
 
 <product productid="rcd_iquote" active="1">
     <title>iQuote</title>
-    <description />
+    <description><![CDATA[vBulletin addon. Easy quote selected text to quick reply box.]]></description>
     <version>0.2</version>
-    <url />
-    <versioncheckurl />
+    <url><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></url>
+    <versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></versioncheckurl>
     <apm_releasedate>0</apm_releasedate>
     <apm_author />
     <apm_relatedurl />
