@@ -2,7 +2,7 @@
 
 <product productid="rcd_iquote" active="1">
     <title>iQuote</title>
-    <description><![CDATA[vBulletin addon. Easy quote selected text to quick reply box.]]></description>
+    <description><![CDATA[Easy quote selected text to quick reply box.]]></description>
     <version>0.2</version>
     <url><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></url>
     <versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></versioncheckurl>
@@ -16,18 +16,14 @@
     <codes>
     </codes>
     <templates>
-        <template name="rcd_iquote_context_menu" templatetype="template" date="1280449501" username="jpatuk" version="0.2"><![CDATA[<!-- iQuote popup menu -->
-<div id="iquote_popup_menu">
+        <template name="rcd_iquote_context_menu" templatetype="template" date="1280449501" username="jpatuk" version="0.2"><![CDATA[<div id="iquote_popup_menu">
  <div class="iquote_menu">
   <ul class="popupbody">
    <li><a href="#" rel="nofollow" onclick="return iQuote.quote_text();">$vbphrase[rcd_iquote_context_menu_quote]</a></li>
   </ul>
  </div>
-</div>
-
-]]></template>
-        <template name="rcd_iquote_css" templatetype="template" date="1280449481" username="jpatuk" version="0.2"><![CDATA[<!-- iQuote css -->
-<style type="text/css">
+</div>]]></template>
+        <template name="rcd_iquote_css" templatetype="template" date="1280449481" username="jpatuk" version="0.2"><![CDATA[<style type="text/css">
 .iquote_menu {
   padding:none;
   margin:none;
@@ -59,14 +55,11 @@
 iQuote.init('posts');
 //-->
 </script>]]></template>
-        <template name="rcd_iquote_js" templatetype="template" date="1280449436" username="jpatuk" version="0.2"><![CDATA[<!-- YUI menu dependencies -->
-<script type="text/javascript" src="clientscript/yui/yahoo-dom-event/yahoo-dom-event.js"></script>
+        <template name="rcd_iquote_js" templatetype="template" date="1280449436" username="jpatuk" version="0.2"><![CDATA[<script type="text/javascript" src="clientscript/yui/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="clientscript/yui/container/container_core-min.js"></script>
 <script type="text/javascript" src="clientscript/yui/menu/menu-min.js"></script>
 
-<!-- iQuote source -->
-<script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>
-        ]]></template>
+<script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>]]></template>
     </templates>
     <stylevardfns>
     </stylevardfns>
