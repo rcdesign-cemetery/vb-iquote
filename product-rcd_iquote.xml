@@ -3,7 +3,7 @@
 <product productid="rcd_iquote" active="1">
 	<title>iQuote</title>
 	<description><![CDATA[Easy quote selected text to quick reply box.]]></description>
-	<version>0.3</version>
+	<version>0.4</version>
 	<url><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></url>
 	<versioncheckurl><![CDATA[http://www.vbulletin.org/forum/misc.php?do=productcheck&pid=rcd_iquote]]></versioncheckurl>
 	<apm_releasedate>0</apm_releasedate>
@@ -88,7 +88,7 @@ iQuote.init('posts');
 			<phpcode><![CDATA[if (THIS_SCRIPT == 'showthread' AND  $show['member'])
 {
     //define product version and assign it to JS version
-    define('RCD_IQUOTE_VERSION', '0.3');
+    define('RCD_IQUOTE_VERSION', '0.4');
     $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION : TIMENOW;
     define('RCD_IQUOTE_JS_VERSION', $version);
 

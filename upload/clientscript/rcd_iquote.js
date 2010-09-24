@@ -55,21 +55,31 @@ var iQuote = {
     },
 
     /**
+     * if element id contains idstring
+     *
+     * @param Element el
+     * @param string idstring
+     */
+    check_for_id: function(el, idstring) {
+        if ( el.id && (0 <= el.id.indexOf(idstring)) ) {
+           return true;
+        }
+        return false;
+    },
+
+    /**
      * add handler on posts
      *
      * @param string posts_container - object fetched by posts_container_id
      */
     add_handlers: function(posts_container) {
         var post_rows = YAHOO.util.Dom.getElementsByClassName("postbody", "*", posts_container);
-        var check_for_id = function(el) {
-           if ( el.id && (0 <= el.id.indexOf("post_message_")) ) {
-              return true;
-           }
-           return false;
+        var check_for_post_id = function(el) {
+           return iQuote.check_for_id(el, "post_message_");
         };
 
         for ( var i = 0; i < post_rows.length; i++ ) {
-            var post_content = YAHOO.util.Dom.getElementBy(check_for_id, "div", post_rows[i]);
+            var post_content = YAHOO.util.Dom.getElementBy(check_for_post_id, "div", post_rows[i]);
             if (!post_content || !post_content.id) {
                continue;
             }
@@ -127,7 +137,14 @@ var iQuote = {
             return;
         }
 
-        if ( iQuote.selected_post_number && (iQuote.selected_post_number == post_number) )
+        var check_for_editor_id = function(el) {
+           return iQuote.check_for_id(el, "vB_Editor_QE_");
+        };
+
+        // show popup only if we are not editing message
+        var editor = YAHOO.util.Dom.getElementBy(check_for_editor_id, "div", fetch_object('post_message_' + post_number));
+        if ( iQuote.selected_post_number && (iQuote.selected_post_number == post_number) &&
+             (!editor || editor == '') )
         {
             iQuote.selected_text = iQuote.getSelectedText();
 
