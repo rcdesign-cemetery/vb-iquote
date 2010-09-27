@@ -178,8 +178,8 @@ var iQuote = {
                         iQuote.context_menu.unsubscribe("focus", onFocus);
                     };
 
-                    if (window.getSelection) {
-
+                    if (window.getSelection)
+                    {
                         var range = window.getSelection().getRangeAt(0);
 
                         var rangeData = {
@@ -305,10 +305,17 @@ var iQuote = {
      * used as fix for problems with copypaste (content of menu is added to selected text) and menu hide (page is scrolled to prev. selected element)
      */
     hide_menu: function() {
-        iQuote.context_menu.hide();
+        var clone = iQuote.context_menu.srcElement.cloneNode(true);
+        clone.id = "iquote_popup_menu";
+
+        iQuote.context_menu.destroy();
+
+        iQuote.context_menu = new YAHOO.widget.Menu(clone, {'clicktohide': false});
+        iQuote.context_menu.render(document.body);
 
         YAHOO.util.Event.removeListener(document, "keydown", iQuote.hide_menu);
         YAHOO.util.Event.removeListener(document, "contextmenu", iQuote.hide_menu);
+
         return true;
     }
 };
