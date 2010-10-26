@@ -39,7 +39,12 @@ var iQuote = {
            return;
         }
 
-        iQuote.context_menu = new YAHOO.widget.Menu("iquote_popup_menu", {'clicktohide': false});
+        iQuote.context_menu = new YAHOO.widget.Menu("iquote_popup_menu",
+                                                    {clicktohide: false,
+                                                     effect: {
+                                                         effect: YAHOO.widget.ContainerEffect.FADE,
+                                                         duration: 0.25
+                                                    }});
         iQuote.context_menu.render(document.body);
         iQuote.add_handlers(posts_container);
         YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getElementsByClassName("popupbody", "*", fetch_object('iquote_popup_menu')), "display", "block");
@@ -310,7 +315,12 @@ var iQuote = {
 
         iQuote.context_menu.destroy();
 
-        iQuote.context_menu = new YAHOO.widget.Menu(clone, {'clicktohide': false});
+        iQuote.context_menu = new YAHOO.widget.Menu(clone,
+                                                    {clicktohide: false,
+                                                     effect: {
+                                                         effect: YAHOO.widget.ContainerEffect.FADE,
+                                                         duration: 0.25
+                                                    }});
         iQuote.context_menu.render(document.body);
 
         YAHOO.util.Event.removeListener(document, "keydown", iQuote.hide_menu);
