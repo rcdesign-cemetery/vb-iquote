@@ -57,11 +57,13 @@
 iQuote.init('posts');
 //-->
 </script>]]></template>
-		<template name="rcd_iquote_js" templatetype="template" date="1280449436" username="jpatuk" version="0.2"><![CDATA[<script type="text/javascript" src="clientscript/yui/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="clientscript/yui/container/container_core-min.js"></script>
-<script type="text/javascript" src="clientscript/yui/menu/menu-min.js"></script>
+		<template name="rcd_iquote_js" templatetype="template" date="1288152128" username="Jannie" version="0.4"><![CDATA[<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/container/container_core-min.js"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/menu/menu-min.js"></script>
 
 <script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>
+<!-- YUI Animation Library -->
+<script type="text/javascript" src="{vb:stylevar yuipath}/animation/animation-min.js?v={vb:raw vboptions.simpleversion}"></script>
         ]]></template>
 	</templates>
 	<stylevardfns>
