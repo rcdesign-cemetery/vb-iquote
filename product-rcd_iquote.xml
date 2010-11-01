@@ -52,9 +52,9 @@
   font:{vb:stylevar navbar_font} !important;
 }
 </style>]]></template>
-		<template name="rcd_iquote_init_js" templatetype="template" date="1280449523" username="jpatuk" version="0.2"><![CDATA[<script type="text/javascript">
+		<template name="rcd_iquote_init_js" templatetype="template" date="1288255683" username="jpatuk" version="0.4"><![CDATA[<script type="text/javascript">
 <!--
-iQuote.init('posts');
+iQuote.init('posts', {vb:raw is_qr_disabled}, "{vb:rawphrase rcd_iquote_disable_quickreply}");
 //-->
 </script>]]></template>
 		<template name="rcd_iquote_js" templatetype="template" date="1288152128" username="Jannie" version="0.4"><![CDATA[<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js"></script>
@@ -91,8 +91,8 @@ iQuote.init('posts');
 {
     //define product version and assign it to JS version
     define('RCD_IQUOTE_VERSION', '0.4');
-    $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION : TIMENOW;
-    define('RCD_IQUOTE_JS_VERSION', $version);
+    $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION . "x" : TIMENOW;
+    define('RCD_IQUOTE_JS_VERSION', $version); 
 
     //add rcd_iquote.js file
     $rcd_iquote_templater = vB_Template::create('rcd_iquote_js');
@@ -101,6 +101,7 @@ iQuote.init('posts');
 
     //init quotes
     $rcd_iquote_templater = vB_Template::create('rcd_iquote_init_js');
+    $rcd_iquote_templater->register('is_qr_disabled', $vbulletin->options['rcd_iquote_is_qr_disabled']);
     $template_hook['footer_javascript'] .= $rcd_iquote_templater->render();
 
     //add context menu
@@ -116,9 +117,22 @@ iQuote.init('posts');
 	<phrases>
 		<phrasetype name="Postbit" fieldname="postbit">
 			<phrase name="rcd_iquote_context_menu_quote" date="1280474725" username="jpatuk" version=""><![CDATA[Quote]]></phrase>
+			<phrase name="rcd_iquote_disable_quickreply" date="1288251487" username="Jannie" version=""><![CDATA[Select text to quote with mouse first!\n\nIf you wish to quote all message - press OK to continue.]]></phrase>
+		</phrasetype>
+		<phrasetype name="vBulletin Settings" fieldname="vbsettings">
+			<phrase name="setting_rcd_iquote_is_qr_disabled_desc" date="1288250981" username="Vitaly" version="0.4"><![CDATA[Shows popup warning on quick reply click. Offer to select text with mouse first.]]></phrase>
+			<phrase name="setting_rcd_iquote_is_qr_disabled_title" date="1288250981" username="Vitaly" version="0.4"><![CDATA[Block quick reply link]]></phrase>
+			<phrase name="settinggroup_rcd_iquote_settings_group" date="1288254702" username="jpatuk" version="0.4"><![CDATA[iQuote]]></phrase>
 		</phrasetype>
 	</phrases>
 	<options>
+		<settinggroup name="rcd_iquote_settings_group" displayorder="65535">
+			<setting varname="rcd_iquote_is_qr_disabled" displayorder="10">
+				<datatype>boolean</datatype>
+				<optioncode>yesno</optioncode>
+				<defaultvalue>1</defaultvalue>
+			</setting>
+		</settinggroup>
 	</options>
 	<helptopics>
 	</helptopics>

@@ -24,11 +24,21 @@ var iQuote = {
     pre_iquote_postbit_init: null,
 
     /**
+     * Container for qr_newreply_activate function
+     */
+    pre_iquote_newreply_activate: null,
+
+    /**
+     * Display text, if reply with quote disabled
+     */
+    dialog_phrase: '',
+
+    /**
      * onload event handler
      *
      * @param string posts_container_id - ID of element which contains all posts
      */
-    init: function(posts_container_id) {
+    init: function(posts_container_id, is_qr_disabled, dlg_phrase) {
         var posts_container = fetch_object(posts_container_id);
         if ( !posts_container ) {
             return;
@@ -49,6 +59,8 @@ var iQuote = {
         iQuote.add_handlers(posts_container);
         YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getElementsByClassName("popupbody", "*", fetch_object('iquote_popup_menu')), "display", "block");
 
+        iQuote.dialog_phrase = dlg_phrase;
+
         // init for AJAX loaded posts (inline edit etc)
         iQuote.pre_iquote_postbit_init = PostBit_Init;
         PostBit_Init = function (obj, post_id)
@@ -56,6 +68,22 @@ var iQuote = {
             iQuote.add_handlers(obj);
 
             iQuote.pre_iquote_postbit_init(obj, post_id);
+        }
+
+        if (is_qr_disabled)
+        {
+            iQuote.pre_iquote_newreply_activate = qr_newreply_activate;
+            qr_newreply_activate = function(event)
+            {
+                if (confirm(iQuote.dialog_phrase))
+                {
+                    iQuote.pre_iquote_newreply_activate.call(this,event);
+                }
+                else
+                {
+                    YAHOO.util.Event.stopEvent(event);
+                }
+            }
         }
     },
 
@@ -151,7 +179,8 @@ var iQuote = {
         if ( iQuote.selected_post_number && (iQuote.selected_post_number == post_number) &&
              (!editor || editor == '') )
         {
-            iQuote.selected_text = iQuote.getSelectedText();
+            // firefox returns " " when user clicks on video (e.g. youtube), so we need to trim the string
+            iQuote.selected_text = iQuote.getSelectedText().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 
             if ( '' !== iQuote.selected_text )
             {
