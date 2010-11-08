@@ -54,7 +54,15 @@ var iQuote = {
                                                      effect: {
                                                          effect: YAHOO.widget.ContainerEffect.FADE,
                                                          duration: 0.25
-                                                    }});
+                                                     }
+                                                    });
+        // Fix for IE7 z-index bug
+        if (YAHOO.env.ua.ie && YAHOO.env.ua.ie < 8)
+        {
+            iQuote.context_menu.cfg.setProperty("position", "dynamic");
+            iQuote.context_menu.cfg.setProperty("iframe", true);
+            iQuote.context_menu.cfg.setProperty("zindex", 10100);
+        }
         iQuote.context_menu.render(document.body);
         iQuote.add_handlers(posts_container);
         YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getElementsByClassName("popupbody", "*", fetch_object('iquote_popup_menu')), "display", "block");
@@ -349,7 +357,16 @@ var iQuote = {
                                                      effect: {
                                                          effect: YAHOO.widget.ContainerEffect.FADE,
                                                          duration: 0.25
-                                                    }});
+                                                     }
+                                                    });
+
+        // Fix for IE7 z-index bug
+        if (YAHOO.env.ua.ie && YAHOO.env.ua.ie < 8)
+        {
+            iQuote.context_menu.cfg.setProperty("position", "dynamic");
+            iQuote.context_menu.cfg.setProperty("iframe", true);
+            iQuote.context_menu.cfg.setProperty("zindex", 10100);
+        }
         iQuote.context_menu.render(document.body);
 
         YAHOO.util.Event.removeListener(document, "keydown", iQuote.hide_menu);
