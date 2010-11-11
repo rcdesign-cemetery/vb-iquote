@@ -57,13 +57,16 @@
 iQuote.init('posts', {vb:raw is_qr_disabled}, "{vb:rawphrase rcd_iquote_disable_quickreply}");
 //-->
 </script>]]></template>
-		<template name="rcd_iquote_js" templatetype="template" date="1288152128" username="Jannie" version="0.4"><![CDATA[<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<template name="rcd_iquote_js" templatetype="template" date="1289466133" username="Jannie" version="0.4"><![CDATA[<vb:if condition="!isset($show['yui_menu_exists'])">
+<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js"></script>
 <script type="text/javascript" src="{vb:stylevar yuipath}/container/container_core-min.js"></script>
 <script type="text/javascript" src="{vb:stylevar yuipath}/menu/menu-min.js"></script>
+</vb:if>
 
 <script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>
-<!-- YUI Animation Library -->
+<vb:if condition="!isset($show['yui_animation_exists'])">
 <script type="text/javascript" src="{vb:stylevar yuipath}/animation/animation-min.js?v={vb:raw vboptions.simpleversion}"></script>
+</vb:if>
         ]]></template>
 	</templates>
 	<stylevardfns>
@@ -91,13 +94,22 @@ iQuote.init('posts', {vb:raw is_qr_disabled}, "{vb:rawphrase rcd_iquote_disable_
 {
     //define product version and assign it to JS version
     define('RCD_IQUOTE_VERSION', '0.4');
-    $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION . "x" : TIMENOW;
+    $version = (!$vbulletin->debug) ? RCD_IQUOTE_VERSION : TIMENOW;
     define('RCD_IQUOTE_JS_VERSION', $version); 
 
     //add rcd_iquote.js file
     $rcd_iquote_templater = vB_Template::create('rcd_iquote_js');
     $rcd_iquote_templater->register('version', RCD_IQUOTE_JS_VERSION);
     $template_hook['headinclude_javascript'] .= $rcd_iquote_templater->render();
+
+    if (!$show['yui_menu_exists'])
+    {
+        $show['yui_menu_exists'] = true;
+    }
+    if (!$show['yui_animation_exists'])
+    {
+        $show['yui_animation_exists'] = true;
+    }
 
     //init quotes
     $rcd_iquote_templater = vB_Template::create('rcd_iquote_init_js');
