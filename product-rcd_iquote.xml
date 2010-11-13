@@ -57,10 +57,10 @@
 iQuote.init('posts', {vb:raw is_qr_disabled}, "{vb:rawphrase rcd_iquote_disable_quickreply}");
 //-->
 </script>]]></template>
-		<template name="rcd_iquote_js" templatetype="template" date="1289466133" username="Jannie" version="0.4"><![CDATA[<vb:if condition="!isset($show['yui_menu_exists'])">
-<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js"></script>
-<script type="text/javascript" src="{vb:stylevar yuipath}/container/container_core-min.js"></script>
-<script type="text/javascript" src="{vb:stylevar yuipath}/menu/menu-min.js"></script>
+		<template name="rcd_iquote_js" templatetype="template" date="1289629082" username="jpatuk" version="0.4"><![CDATA[<vb:if condition="!isset($show['yui_menu_exists'])">
+<script type="text/javascript" src="{vb:stylevar yuipath}/yahoo-dom-event/yahoo-dom-event.js?v={vb:raw vboptions.simpleversion}"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/container/container_core-min.js?v={vb:raw vboptions.simpleversion}"></script>
+<script type="text/javascript" src="{vb:stylevar yuipath}/menu/menu-min.js?v={vb:raw vboptions.simpleversion}"></script>
 </vb:if>
 
 <script type="text/javascript" src="clientscript/rcd_iquote.js?v={vb:raw version}"></script>
